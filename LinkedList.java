@@ -1,0 +1,252 @@
+
+public class LinkedList {
+
+	private class Node{
+		int data;
+		Node next;
+	}
+	private Node head;
+    private Node tail;
+    private int size;
+    public void display() {
+    	Node temp=this.head;
+    	while(temp!=null) {
+    		System.out.println(temp.data);
+    		temp=temp.next;
+    	}
+    }
+    //O(1)
+    public void addLast(int item) {
+    	Node nn=new Node();
+    	nn.data=item;
+    	nn.next=null;
+    	if(this.size>=1) {
+    		this.tail.next=nn;
+    		
+    	}
+    	if(this.size==0) {
+    		this.head=nn;
+    		this.tail=nn;
+    		this.size++;
+    	}
+    	else {
+    		this.tail=nn;
+    		size++;
+    	}
+    	
+    }
+    //O(1)
+    public void addFirst(int item) {
+    	Node nn=new Node();
+    	nn.data=item;
+    	nn.next=null;
+    	if(this.size>=1) {
+    		nn.next=this.head;
+    	}
+    	if(this.size==0) {
+    		this.head=nn;
+    		this.tail=nn;
+    		this.size++;
+    	}
+    	else {
+    		this.head=nn;
+    		this.size++;
+    	}
+    }
+    public int getFirst() throws Exception {
+    	if(this.size==0) {
+    		throw new Exception("LL is Empty");
+    	}
+    	else {
+    		return this.head.data;
+    	}
+    }
+    public int getLast() throws Exception {
+    	if(this.size==0) {
+    		throw new Exception("LL is Empty");
+    	}
+    	else {
+    		return this.tail.data;
+    	}
+    }
+    public int getAt(int pos) throws Exception {
+    	if(this.size==0) {
+    		throw new Exception("LL is Empty");
+    	}
+    	if(pos<0||pos>=this.size) {
+    		throw new Exception("Index Not Found");
+    	}
+    	else {
+    		
+    			int i=1;
+    			Node temp=this.head;
+    			while(i<=pos) {
+    				temp=temp.next;
+    				i++;
+    				
+    			}
+    			return temp.data;
+    			
+    		}
+    	}
+    //o(n)
+    public Node getNodeAt(int pos) throws Exception {
+    	if(this.size==0) {
+    		throw new Exception("LL is Empty");
+    	}
+    	if(pos<0||pos>=this.size) {
+    		throw new Exception("Index Not Found");
+    	}
+    	else {
+    		
+    			int i=1;
+    			Node temp=this.head;
+    			while(i<=pos) {
+    				temp=temp.next;
+    				i++;
+    				
+    			}
+    			return temp;
+    			
+    		}
+    	
+    }
+    //O(n)
+    public void addAt(int item,int pos) throws Exception {
+    	
+    	if(pos<0||pos>=this.size) {
+    		throw new Exception("Index Not Found");
+    	}Node nn=new Node();
+    	nn.data=item;
+    	nn.next=null;
+    	if(pos==1) {
+    		addFirst(item);
+    	}
+    	if(pos==this.size) {
+    		addLast(item); 
+    	}
+    	else {
+    		Node nn1=getNodeAt(pos-1);
+    		Node np1=nn1.next;
+    		nn1.next=nn;
+    		nn.next=np1;
+    		this.size++;
+    		
+    	}
+    }
+    //O(1)
+    public int removeFirst() throws Exception {
+    	if(this.size==0) {
+    		throw new Exception("LL is Empty");
+    	}
+    	int n=this.head.data;
+    	if(this.size==1) {
+    		
+    		this.head=null;
+    		this.tail=null;
+    		this.size=0;
+    		
+    		
+    		
+    		
+    	}
+    	else {
+    		this.head=this.head.next;
+    		this.size--;
+    	}
+    	return n;
+    }
+    //O(n)
+    public int removelast() throws Exception{
+    	if(this.size==0) {
+    		throw new Exception("LL is Empty");
+    	}
+    	int n=this.tail.data;
+if(this.size==1) {
+    		
+    		this.head=null;
+    		this.tail=null;
+    		this.size=0;
+    		
+    		
+    		
+    		
+    	}else {
+    		//Node nn=this.head;
+    		//while(nn.next.next!=null) {
+    			//nn=nn.next;
+    		//}
+    		Node nn=getNodeAt(this.size-2);
+    		this.tail=nn;
+    		this.tail.next=null;
+    		this.size--;
+    	}
+return n;
+    }
+    public int removeAt(int pos) throws Exception {
+    	
+    	if(pos<0||pos>=this.size) {
+    		throw new Exception("Index Not Found");
+    	}
+    	if(pos==0) {
+    		return removeFirst();
+    	}
+    	else if(pos==this.size-1) {
+    		return removelast();
+    	}
+    	else {
+    		Node nm1=getNodeAt(pos-1);
+    		Node n=nm1.next;
+    		Node np1=n.next;
+    		nm1.next=np1;
+    		this.size--;
+    		return n.data;
+    	}
+    	
+    }
+    public void reverseData() throws Exception {
+    	int left=0;
+    	int right=this.size-1;
+    	while(left<right) {
+    		Node ln=getNodeAt(left);
+    		Node rn=getNodeAt(right);
+    		int temp=ln.data;
+    		ln.data=rn.data;
+    		rn.data=temp;
+    		left++;
+    		right--;
+    	}
+    
+    }
+    public void reversePointer() {
+    	Node prev=this.head;
+    	Node curr=prev.next;
+    	while(curr!=null) {
+    		Node ahead=curr.next;
+    		curr.next=prev;
+    		prev=curr;
+    		curr=ahead;  
+    	}
+    	Node t=this.head;
+    	this.head=this.tail;
+    	this.tail=t;
+    }
+    //without using size function
+    public int mid() {
+    	Node slow=this.head;
+    	Node fast=this.head;
+    	while(fast.next!=null&&fast.next.next!=null) {
+    		slow=slow.next;
+    		fast=fast.next.next;
+    		
+    	}
+    	return slow.data;
+    }
+    public int size() {
+    	return this.size;
+    }
+    
+		
+    }
+    
+
