@@ -1,6 +1,6 @@
+package Practice;
 
-
-public class Car {
+public class Car implements Comparable<Car> {
 	// implements Comparable<Car> {
 	int speed;
 	int price;
@@ -13,6 +13,9 @@ public class Car {
 
 	public String toString() {
 		return "S:"+this.speed+"P:"+this.price+"C:"+this.color;
+	}
+	public int compareTo(Car other) {
+		return this.speed-other.speed;
 	}
 
 
