@@ -16,10 +16,12 @@ import java.util.ArrayList;
 
 public class Heap {
 	ArrayList<Integer> data=new ArrayList<>();
+	//O(1)
 	public void add(int item) {
 		data.add(item);
 		upheapify(data.size()-1);
 	}
+	//O(n)
 	private void upheapify(int ci) {
 		int pi=(ci-1)/2;
 		if(data.get(ci)<data.get(pi)) {
@@ -28,6 +30,7 @@ public class Heap {
 		}
 		
 	}
+	//Addition Complexity is O(log n)
 	private void swap(int i,int j) {
 		int t1=data.get(i);
 		int t2=data.get(j);
@@ -43,12 +46,15 @@ public class Heap {
 	public boolean isEmpty() {
 		return this.size()==0;
 	}
+	//O(1)
 	public int remove() {
 		swap(0,this.data.size()-1);
 	    int rv=this.data.remove(this.data.size()-1);
 	    downheapify(0);
 	    return rv;
 	}
+	//O(h)
+	//Remove: O(log n)
 	private void downheapify(int pi) {
 		int lci=2*pi+1;
 		int rci=2*pi+2;
@@ -68,6 +74,7 @@ public class Heap {
 		
 		
 	}
+	//O(1)
 	public int get() {
 		return this.data.get(0);
 	}
