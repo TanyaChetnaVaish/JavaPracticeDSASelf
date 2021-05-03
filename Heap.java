@@ -43,5 +43,34 @@ public class Heap {
 	public boolean isEmpty() {
 		return this.size()==0;
 	}
+	public int remove() {
+		swap(0,this.data.size()-1);
+	    int rv=this.data.remove(this.data.size()-1);
+	    downheapify(0);
+	    return rv;
+	}
+	private void downheapify(int pi) {
+		int lci=2*pi+1;
+		int rci=2*pi+2;
+		int mini=pi;
+		if(lci<this.data.size()&&data.get(lci)<data.get(mini)) {
+			mini=lci;
+		}
+		if(rci<this.data.size()&&data.get(rci)<data.get(mini)) {
+			mini=rci;
+		}
+		if(mini!=pi) {
+			swap(mini,pi);
+			downheapify(mini);
+			
+			
+		}
+		
+		
+	}
+	public int get() {
+		return this.data.get(0);
+	}
+	
 
 }
