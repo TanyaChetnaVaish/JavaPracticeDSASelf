@@ -1,0 +1,47 @@
+package Practice;
+/*
+ * Heap is a binary tree which follows the following property:
+   i) Priority of parent is always more than children
+   ii) It is a complete binary tree
+   Priority: 
+   -Smaller value has higher priority (Min Heap-parent value is less) eg: ranks of student
+   -Larger value has higher priority(Max heap-parent value is more) eg : MNarks of student
+   CBT: A complete binary tree is a binary tree in which every level
+   except the last is completely filled and the last level is filled from left to right
+   (n-1)th level must be completely filled to start filling nth level.The nth level is filled from 
+   left to right
+ */
+
+import java.util.ArrayList;
+
+public class Heap {
+	ArrayList<Integer> data=new ArrayList<>();
+	public void add(int item) {
+		data.add(item);
+		upheapify(data.size()-1);
+	}
+	private void upheapify(int ci) {
+		int pi=(ci-1)/2;
+		if(data.get(ci)<data.get(pi)) {
+			swap(ci,pi);
+			upheapify(pi);
+		}
+		
+	}
+	private void swap(int i,int j) {
+		int t1=data.get(i);
+		int t2=data.get(j);
+		data.set(i, t2);
+		data.set(j, t1);
+	}
+	public void display() {
+		System.out.println(data);
+	}
+	public int size() {
+		return this.data.size();
+	}
+	public boolean isEmpty() {
+		return this.size()==0;
+	}
+
+}
