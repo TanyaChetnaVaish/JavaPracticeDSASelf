@@ -83,5 +83,21 @@ public void display() {
 	}
 	System.out.println("---------");
 }
+public boolean hasPath(String vname1,String vname2,HashMap<String,Boolean> process) {
+	process.put(vname1, true);
+	if(containsEdge(vname1,vname2))
+	{
+		return true;
+	}
+	Vertex vtx=vtces.get(vname1);
+	ArrayList<String> nbrs=new ArrayList<>(vtces.keySet());
+	for(String nbr:nbrs) {
+		if(!process.containsKey(nbr)&&hasPath(nbr,vname2,process))
+		
+		return true;
+		
+	}
+	return false;
+}
 }
 
